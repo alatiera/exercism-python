@@ -142,7 +142,10 @@ class ClassesTest(unittest.TestCase):
         obj_list = new_aliens_collection(position_data)
         obj_error = "new_aliens_collection must return a list of Alien objects."
 
-        for obj, position in zip(obj_list, position_data):
+        len_error = (f"Expected to find {len(position_data)} Aliens but instead found {len(obj_list)}")
+        self.assertEqual(len(position_data), len(obj_list), msg=len_error)
+
+        for obj, position in zip(obj_list, position_data, strict=True):
             self.assertIsInstance(obj, Alien, msg=obj_error)
 
             pos_error = (
